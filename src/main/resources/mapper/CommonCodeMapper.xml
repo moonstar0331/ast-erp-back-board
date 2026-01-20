@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.api.ast.boardservice.mapper.CommonCodeMapper">
+
+    <insert id="insertOne" parameterType="com.api.ast.boardservice.dto.code.CommonCodeDto">
+        INSERT INTO common_code (
+            group_code_id,
+            parent_code_id,
+            code_value,
+            code_name,
+            use_yn,
+            created_at,
+            updated_at
+        ) VALUES (
+            #{commonCode.groupCodeId},
+            #{commonCode.parentId},
+            #{commonCode.codeValue},
+            #{commonCode.codeName},
+            #{commonCode.useYn},
+            NOW(),
+            NOW()
+        )
+    </insert>
+
+    <select id="selectOne" resultType="com.api.ast.boardservice.dto.code.CommonCodeDto">
+        SELECT
+            code_id,
+            group_code_id,
+            parent_code_id,
+            code_value,
+            code_name,
+            use_yn,
+            created_at,
+            updated_at
+        FROM common_code
+        WHERE code_id = #{codeId}
+            AND deleted_yn = false
+    </select>
+
+    <select id="selectAll" resultType="com.api.ast.boardservice.dto.code.CommonCodeDto">
+        SELECT
+            code_id,
+            group_code_id,
+            parent_code_id,
+            code_value,
+            code_name,
+            use_yn,
+            created_at,
+            updated_at
+        FROM common_code
+        WHERE deleted_yn = false
+    </select>
+
+    <select id="selectAllByParentCodeId" resultType="com.api.ast.boardservice.dto.code.CommonCodeDto">
+        SELECT
+            code_id,
+            group_code_id,
+            parent_code_id,
+            code_value,
+            code_name,
+            use_yn,
+            created_at,
+            updated_at
+        FROM common_code
+        WHERE parent_code_id = #{parentCodeId}
+            AND deleted_yn = false
+    </select>
+
+
+    <select id="selectAllByGroupCodeId" resultType="com.api.ast.boardservice.dto.code.CommonCodeDto">
+        SELECT
+        code_id,
+        group_code_id,
+        parent_code_id,
+        code_value,
+        code_name,
+        use_yn,
+        created_at,
+        updated_at
+        FROM common_code
+        WHERE group_code_id = #{groupCodeId}
+            AND deleted_yn = false
+    </select>
+
+    <update id="updateOne" parameterType="com.api.ast.boardservice.dto.code.CommonCodeDto">
+        UPDATE common_code
+        SET
+            parent_code_id = #{commonCode.parentId},
+            code_value = #{commonCode.codeValue},
+            code_name = #{commonCode.codeName},
+            use_yn = #{commonCode.useYn},
+            updated_at = NOW()
+        WHERE code_id = #{commonCode.codeId}
+    </update>
+
+    <update id="deleteOne" parameterType="com.api.ast.boardservice.dto.code.CommonCodeDto">
+        UPDATE common_code
+        SET
+            deleted_yn = true,
+            updated_at = NOW()
+        WHERE code_id = #{commonCode.codeId}
+    </update>
+</mapper>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.api.ast.boardservice.mapper.GroupCodeMapper">
+
+    <insert id="insertOne" parameterType="com.api.ast.boardservice.dto.group.GroupCodeDto">
+        INSERT INTO common_code_group(
+            group_code,
+            group_name,
+            description,
+            use_yn,
+            created_at,
+            updated_at)
+        VALUES(
+            #{groupCode.groupCode},
+            #{groupCode.groupName},
+            #{groupCode.description},
+            #{groupCode.useYn},
+            NOW(),
+            NOW()
+        )
+    </insert>
+
+    <select id="selectOne" resultType="com.api.ast.boardservice.dto.group.GroupCodeDto">
+        SELECT
+            group_code_id,
+            group_code,
+            group_name,
+            description,
+            use_yn
+        FROM common_code_group
+        WHERE group_code_id = #{groupCodeId}
+        AND deleted_yn = false
+    </select>
+
+    <select id="selectAll" resultType="com.api.ast.boardservice.dto.group.GroupCodeDto">
+        SELECT
+        group_code_id,
+        group_code,
+        group_name,
+        description,
+        use_yn,
+        created_at,
+        updated_at
+        FROM common_code_group
+        WHERE deleted_yn = false
+    </select>
+
+    <update id="updateOne" parameterType="com.api.ast.boardservice.dto.group.GroupCodeDto">
+        UPDATE common_code_group
+        SET
+            group_code = #{groupCode.groupCode},
+            group_name = #{groupCode.groupName},
+            description = #{groupCode.description},
+            use_yn = #{groupCode.useYn},
+            updated_at = NOW()
+        WHERE group_code_id = #{groupCode.groupCodeId}
+    </update>
+
+    <update id="updateAll" parameterType="list">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE common_code_group
+            SET
+                group_code = #{item.groupCode},
+                group_name = #{item.groupName},
+                description = #{item.description},
+                use_yn = #{item.useYn},
+                updated_at = NOW()
+            WHERE group_code_id = #{item.groupCodeId}
+        </foreach>
+    </update>
+</mapper>
