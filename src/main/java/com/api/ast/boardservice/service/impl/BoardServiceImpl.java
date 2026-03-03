@@ -41,6 +41,11 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    public BoardDto selectBoardByMenuId(Long menuId) {
+        return boardMapper.selectBoardByMenuId(menuId);
+    }
+
+    @Override
     @Transactional
     public BoardDto updateBoardOne(BoardDto dto) {
         int updatedCount = boardMapper.updateBoardOne(dto);

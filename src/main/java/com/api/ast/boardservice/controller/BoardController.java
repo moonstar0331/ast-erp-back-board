@@ -58,6 +58,16 @@ public class BoardController {
                 .body(response);
     }
 
+    // menuId를 통한 board_master 및 board_post 조회
+    @GetMapping("/menu/{menuId}")
+    public ResponseEntity<BoardResponse> selectBoardByMenuId(@PathVariable Long menuId) {
+        BoardDto result = boardService.selectBoardByMenuId(menuId);
+        BoardResponse response = new ModelMapper().map(result, BoardResponse.class);
+        return ResponseEntity
+                .ok()
+                .body(response);
+    }
+
     // board_master (게시판 설정) 수정
     @PutMapping("/{boardId}")
     public ResponseEntity<BoardResponse> updateBoardOne(@PathVariable Long boardId, @RequestBody BoardCreateRequest request) {

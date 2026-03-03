@@ -96,6 +96,37 @@
         WHERE m.board_id = #{boardId}
     </select>
 
+    <select id="selectBoardByMenuId" resultMap="BoardWithPostsMap">
+        SELECT
+            m.board_id,
+            m.board_type_code,
+            m.board_name,
+            m.use_comment_yn,
+            m.use_yn,
+            m.created_at,
+            m.created_by,
+            m.updated_at,
+            m.updated_by,
+            m.deleted_yn,
+            m.menu_id,
+            p.post_id,
+            p.board_id AS p_board_id,
+            p.writer_id,
+            p.title,
+            p.content,
+            p.post_status_code,
+            p.created_at AS p_created_at,
+            p.created_by AS p_created_by,
+            p.updated_at AS p_updated_at,
+            p.updated_by AS p_updated_by,
+            p.deleted_yn AS p_deleted_yn
+        FROM
+            board_master m
+        LEFT JOIN
+            board_post p ON m.board_id = p.board_id AND p.deleted_yn = false
+        WHERE m.menu_id = #{menuId}
+    </select>
+
     <update id="updateBoardOne" parameterType="com.api.ast.boardservice.dto.BoardDto">
         UPDATE board_master
         SET

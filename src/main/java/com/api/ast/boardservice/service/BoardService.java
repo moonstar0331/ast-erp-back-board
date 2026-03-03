@@ -13,6 +13,8 @@ public interface BoardService {
 
     BoardDto selectBoardOne(Long boardId);
 
+    BoardDto selectBoardByMenuId(Long menuId);
+
     BoardDto updateBoardOne(BoardDto dto);
 
     void deleteBoardOne(Long boardId);
