@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardMasterDto {
+public class BoardDto {
     private Long boardId;
     private String boardTypeCode;
     private String boardName;

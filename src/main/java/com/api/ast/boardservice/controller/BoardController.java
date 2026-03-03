@@ -1,11 +1,11 @@
 package com.api.ast.boardservice.controller;
 
-import com.api.ast.boardservice.dto.BoardMasterDto;
+import com.api.ast.boardservice.dto.BoardDto;
 import com.api.ast.boardservice.dto.BoardPostDto;
-import com.api.ast.boardservice.vo.request.BoardMasterCreateRequest;
+import com.api.ast.boardservice.vo.request.BoardCreateRequest;
 import com.api.ast.boardservice.vo.request.BoardPostCreateRequest;
 import com.api.ast.boardservice.service.BoardService;
-import com.api.ast.boardservice.vo.response.BoardMasterResponse;
+import com.api.ast.boardservice.vo.response.BoardResponse;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -22,25 +22,25 @@ public class BoardController {
     private final BoardService boardService;
 
     // board_master (게시판 설정) 생성
-    @PostMapping("/master")
-    public ResponseEntity<Void> insertMasterOne(@RequestBody BoardMasterCreateRequest request) {
-        BoardMasterDto dto = new ModelMapper().map(request, BoardMasterDto.class);
-        boardService.insertMasterOne(dto);
+    @PostMapping("/")
+    public ResponseEntity<Void> insertBoardOne(@RequestBody BoardCreateRequest request) {
+        BoardDto dto = new ModelMapper().map(request, BoardDto.class);
+        boardService.insertBoardOne(dto);
         return ResponseEntity
                 .ok()
                 .build();
     }
 
     // board_master (게시판 설정) 리스트 조회
-    @GetMapping("/master/list")
-    public ResponseEntity<List<BoardMasterResponse>> selectMasterList() {
-        List<BoardMasterDto> result = boardService.selectMasterList();
+    @GetMapping("/list")
+    public ResponseEntity<List<BoardResponse>> selectBoardList() {
+        List<BoardDto> result = boardService.selectBoardList();
 
         ModelMapper mapper = new ModelMapper();
-        List<BoardMasterResponse> response = new ArrayList<>();
+        List<BoardResponse> response = new ArrayList<>();
 
         result.forEach(dto ->
-                response.add(mapper.map(dto, BoardMasterResponse.class))
+                response.add(mapper.map(dto, BoardResponse.class))
         );
 
         return ResponseEntity
@@ -49,22 +49,22 @@ public class BoardController {
     }
 
     // board_master (게시판 설정) 단건 조회
-    @GetMapping("/master/{masterId}")
-    public ResponseEntity<BoardMasterResponse> selectMasterOne(@RequestParam Long masterId) {
-        BoardMasterDto result = boardService.selectMasterOne(masterId);
-        BoardMasterResponse response = new ModelMapper().map(result, BoardMasterResponse.class);
+    @GetMapping("/{boardId}")
+    public ResponseEntity<BoardResponse> selectBoardOne(@RequestParam Long boardId) {
+        BoardDto result = boardService.selectBoardOne(boardId);
+        BoardResponse response = new ModelMapper().map(result, BoardResponse.class);
         return ResponseEntity
                 .ok()
                 .body(response);
     }
 
     // board_master (게시판 설정) 수정
-    @PutMapping("/master/{masterId}")
-    public ResponseEntity<BoardMasterResponse> updateMasterOne(@RequestParam Long masterId, @RequestBody BoardMasterCreateRequest request) {
-        BoardMasterDto dto = new ModelMapper().map(request, BoardMasterDto.class);
-        dto.setBoardId(masterId);
-        BoardMasterDto result = boardService.updateMasterOne(dto);
-        BoardMasterResponse response = new ModelMapper().map(result, BoardMasterResponse.class);
+    @PutMapping("/{boardId}")
+    public ResponseEntity<BoardResponse> updateBoardOne(@RequestParam Long boardId, @RequestBody BoardCreateRequest request) {
+        BoardDto dto = new ModelMapper().map(request, BoardDto.class);
+        dto.setBoardId(boardId);
+        BoardDto result = boardService.updateBoardOne(dto);
+        BoardResponse response = new ModelMapper().map(result, BoardResponse.class);
 
         return ResponseEntity
                 .ok()
@@ -72,9 +72,9 @@ public class BoardController {
     }
 
     // board_master (게시판 설정) 삭제
-    @DeleteMapping("/master/{masterId}")
-    public ResponseEntity<Void> deleteMasterOne(@RequestParam Long masterId) {
-        boardService.deleteMasterOne(masterId);
+    @DeleteMapping("/{boardId}")
+    public ResponseEntity<Void> deleteBoardOne(@RequestParam Long boardId) {
+        boardService.deleteBoardOne(boardId);
         return ResponseEntity.ok().build();
     }
 

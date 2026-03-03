@@ -1,21 +1,21 @@
 package com.api.ast.boardservice.service;
 
-import com.api.ast.boardservice.dto.BoardMasterDto;
+import com.api.ast.boardservice.dto.BoardDto;
 import com.api.ast.boardservice.dto.BoardPostDto;
 
 import java.util.List;
 
 public interface BoardService {
 
-    void insertMasterOne(BoardMasterDto dto);
+    void insertBoardOne(BoardDto dto);
 
-    List<BoardMasterDto> selectMasterList();
+    List<BoardDto> selectBoardList();
 
-    BoardMasterDto selectMasterOne(Long masterId);
+    BoardDto selectBoardOne(Long boardId);
 
-    BoardMasterDto updateMasterOne(BoardMasterDto dto);
+    BoardDto updateBoardOne(BoardDto dto);
 
-    void deleteMasterOne(Long masterId);
+    void deleteBoardOne(Long boardId);
 
     void insertPostOne(BoardPostDto dto);
 

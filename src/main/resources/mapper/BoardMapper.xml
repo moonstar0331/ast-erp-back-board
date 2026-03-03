@@ -5,7 +5,7 @@
 
 <mapper namespace="com.api.ast.boardservice.mapper.BoardMapper">
 
-    <insert id="insertMasterOne" parameterType="com.api.ast.boardservice.dto.BoardMasterDto">
+    <insert id="insertBoardOne" parameterType="com.api.ast.boardservice.dto.BoardDto">
             INSERT INTO board_master (
                 board_type_code,
                 board_name,
@@ -21,7 +21,7 @@
             )
     </insert>
 
-    <select id="selectMasterList" resultType="com.api.ast.boardservice.dto.BoardMasterDto">
+    <select id="selectBoardList" resultType="com.api.ast.boardservice.dto.BoardDto">
             SELECT
                 board_id,
                 board_type_code,
@@ -38,7 +38,7 @@
                 board_master
     </select>
 
-    <select id="selectMasterOne" resultType="com.api.ast.boardservice.dto.BoardMasterDto">
+    <select id="selectBoardOne" resultType="com.api.ast.boardservice.dto.BoardDto">
         SELECT
             board_id,
             board_type_code,
@@ -53,10 +53,10 @@
             menu_id
         FROM
             board_master
-        WHERE board_id = #{masterId}
+        WHERE board_id = #{boardId}
     </select>
 
-    <update id="updateMasterOne" parameterType="com.api.ast.boardservice.dto.BoardMasterDto">
+    <update id="updateBoardOne" parameterType="com.api.ast.boardservice.dto.BoardDto">
         UPDATE board_master
         SET
             board_type_code = #{boardTypeCode},
@@ -66,11 +66,11 @@
         WHERE board_id = #{boardId}
     </update>
 
-    <update id="deleteMasterOne" parameterType="com.api.ast.boardservice.dto.BoardMasterDto">
+    <update id="deleteBoardOne" parameterType="com.api.ast.boardservice.dto.BoardDto">
             UPDATE board_master
             SET
                 deleted_yn = true
-            WHERE board_id = #{masterId}
+            WHERE board_id = #{boardId}
     </update>
 
     <insert id="insertPostOne" parameterType="com.api.ast.boardservice.dto.BoardPostDto">

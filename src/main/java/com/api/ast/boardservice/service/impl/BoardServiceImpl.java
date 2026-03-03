@@ -1,6 +1,6 @@
 package com.api.ast.boardservice.service.impl;
 
-import com.api.ast.boardservice.dto.BoardMasterDto;
+import com.api.ast.boardservice.dto.BoardDto;
 import com.api.ast.boardservice.dto.BoardPostDto;
 import com.api.ast.boardservice.exception.BoardServiceException;
 import com.api.ast.boardservice.exception.ErrorCode;
@@ -22,40 +22,40 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     @Transactional
-    public void insertMasterOne(BoardMasterDto dto) {
+    public void insertBoardOne(BoardDto dto) {
         try {
-            boardMapper.insertMasterOne(dto);
+            boardMapper.insertBoardOne(dto);
         } catch (Exception e) {
             throw new BoardServiceException(ErrorCode.BOARD_MASTER_CREATE_ERROR);
         }
     }
 
     @Override
-    public List<BoardMasterDto> selectMasterList() {
-        return boardMapper.selectMasterList();
+    public List<BoardDto> selectBoardList() {
+        return boardMapper.selectBoardList();
     }
 
     @Override
-    public BoardMasterDto selectMasterOne(Long masterId) {
-        return boardMapper.selectMasterOne(masterId);
+    public BoardDto selectBoardOne(Long boardId) {
+        return boardMapper.selectBoardOne(boardId);
     }
 
     @Override
     @Transactional
-    public BoardMasterDto updateMasterOne(BoardMasterDto dto) {
-        int updatedCount = boardMapper.updateMasterOne(dto);
+    public BoardDto updateBoardOne(BoardDto dto) {
+        int updatedCount = boardMapper.updateBoardOne(dto);
 
         if (updatedCount == 0) {
             throw new BoardServiceException(ErrorCode.BOARD_MASTER_UPDATE_ERROR);
         }
 
-        return boardMapper.selectMasterOne(dto.getBoardId());
+        return boardMapper.selectBoardOne(dto.getBoardId());
     }
 
     @Override
     @Transactional
-    public void deleteMasterOne(Long masterId) {
-        boardMapper.deleteMasterOne(masterId);
+    public void deleteBoardOne(Long boardId) {
+        boardMapper.deleteBoardOne(boardId);
     }
 
     @Override

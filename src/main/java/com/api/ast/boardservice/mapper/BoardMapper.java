@@ -1,6 +1,6 @@
 package com.api.ast.boardservice.mapper;
 
-import com.api.ast.boardservice.dto.BoardMasterDto;
+import com.api.ast.boardservice.dto.BoardDto;
 import com.api.ast.boardservice.dto.BoardPostDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,15 +9,15 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
 
-    void insertMasterOne(BoardMasterDto dto);
+    void insertBoardOne(BoardDto dto);
 
-    List<BoardMasterDto> selectMasterList();
+    List<BoardDto> selectBoardList();
 
-    BoardMasterDto selectMasterOne(Long masterId);
+    BoardDto selectBoardOne(Long boardId);
 
-    int updateMasterOne(BoardMasterDto dto);
+    int updateBoardOne(BoardDto dto);
 
-    void deleteMasterOne(Long masterId);
+    void deleteBoardOne(Long boardId);
 
     void insertPostOne(BoardPostDto dto);
 
