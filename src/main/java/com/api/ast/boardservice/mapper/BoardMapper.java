@@ -23,6 +23,8 @@ public interface BoardMapper {
 
     List<BoardPostDto> selectPostList();
 
+    List<BoardPostDto> selectPostListByBoardId(Long boardId);
+
     BoardPostDto selectPostOne(Long postId);
 
     int updatePostOne(BoardPostDto dto);

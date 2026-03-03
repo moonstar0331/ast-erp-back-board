@@ -37,7 +37,12 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardDto selectBoardOne(Long boardId) {
-        return boardMapper.selectBoardOne(boardId);
+        BoardDto boardDto = boardMapper.selectBoardOne(boardId);
+        if (boardDto != null) {
+            List<BoardPostDto> posts = boardMapper.selectPostListByBoardId(boardId);
+            boardDto.setPosts(posts);
+        }
+        return boardDto;
     }
 
     @Override
@@ -49,7 +54,7 @@ public class BoardServiceImpl implements BoardService {
             throw new BoardServiceException(ErrorCode.BOARD_MASTER_UPDATE_ERROR);
         }
 
-        return boardMapper.selectBoardOne(dto.getBoardId());
+        return this.selectBoardOne(dto.getBoardId());
     }
 
     @Override

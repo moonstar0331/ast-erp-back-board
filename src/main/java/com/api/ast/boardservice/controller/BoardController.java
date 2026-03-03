@@ -50,7 +50,7 @@ public class BoardController {
 
     // board_master (게시판 설정) 단건 조회
     @GetMapping("/{boardId}")
-    public ResponseEntity<BoardResponse> selectBoardOne(@RequestParam Long boardId) {
+    public ResponseEntity<BoardResponse> selectBoardOne(@PathVariable Long boardId) {
         BoardDto result = boardService.selectBoardOne(boardId);
         BoardResponse response = new ModelMapper().map(result, BoardResponse.class);
         return ResponseEntity
@@ -60,7 +60,7 @@ public class BoardController {
 
     // board_master (게시판 설정) 수정
     @PutMapping("/{boardId}")
-    public ResponseEntity<BoardResponse> updateBoardOne(@RequestParam Long boardId, @RequestBody BoardCreateRequest request) {
+    public ResponseEntity<BoardResponse> updateBoardOne(@PathVariable Long boardId, @RequestBody BoardCreateRequest request) {
         BoardDto dto = new ModelMapper().map(request, BoardDto.class);
         dto.setBoardId(boardId);
         BoardDto result = boardService.updateBoardOne(dto);
@@ -73,7 +73,7 @@ public class BoardController {
 
     // board_master (게시판 설정) 삭제
     @DeleteMapping("/{boardId}")
-    public ResponseEntity<Void> deleteBoardOne(@RequestParam Long boardId) {
+    public ResponseEntity<Void> deleteBoardOne(@PathVariable Long boardId) {
         boardService.deleteBoardOne(boardId);
         return ResponseEntity.ok().build();
     }
@@ -107,7 +107,7 @@ public class BoardController {
 
     // board_post (게시글) 단건 조회
     @GetMapping("/post/{postId}")
-    public ResponseEntity<BoardPostDto> selectPostOne(@RequestParam Long postId) {
+    public ResponseEntity<BoardPostDto> selectPostOne(@PathVariable Long postId) {
         BoardPostDto result = boardService.selectPostOne(postId);
         BoardPostDto response = new ModelMapper().map(result, BoardPostDto.class);
 
@@ -118,7 +118,7 @@ public class BoardController {
 
     // board_post (게시글) 수정
     @PutMapping("/post/{postId}")
-    public ResponseEntity<BoardPostDto> updatePostOne(@RequestParam Long postId, @RequestBody BoardPostCreateRequest request) {
+    public ResponseEntity<BoardPostDto> updatePostOne(@PathVariable Long postId, @RequestBody BoardPostCreateRequest request) {
         BoardPostDto dto = new ModelMapper().map(request, BoardPostDto.class);
         dto.setPostId(postId);
         BoardPostDto result = boardService.updatePostOne(dto);
@@ -131,7 +131,7 @@ public class BoardController {
 
     // board_post (게시글) 삭제
     @DeleteMapping("/post/{postId}")
-    public ResponseEntity<Void> deletePostOne(@RequestParam Long postId) {
+    public ResponseEntity<Void> deletePostOne(@PathVariable Long postId) {
         boardService.deletePostOne(postId);
         return ResponseEntity.ok().build();
     }

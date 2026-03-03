@@ -106,6 +106,24 @@
                 board_post
     </select>
 
+    <select id="selectPostListByBoardId" resultType="com.api.ast.boardservice.dto.BoardPostDto">
+        SELECT
+            post_id,
+            board_id,
+            writer_id,
+            title,
+            content,
+            post_status_code,
+            created_at,
+            created_by,
+            updated_at,
+            updated_by,
+            deleted_yn
+        FROM
+            board_post
+        WHERE board_id = #{boardId}
+    </select>
+
     <select id="selectPostOne" resultType="com.api.ast.boardservice.dto.BoardPostDto">
             SELECT
                 post_id,
