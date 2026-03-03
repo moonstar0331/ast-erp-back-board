@@ -38,22 +38,62 @@
                 board_master
     </select>
 
-    <select id="selectBoardOne" resultType="com.api.ast.boardservice.dto.BoardDto">
+    <resultMap id="BoardWithPostsMap" type="com.api.ast.boardservice.dto.BoardDto">
+        <id property="boardId" column="board_id"/>
+        <result property="boardTypeCode" column="board_type_code"/>
+        <result property="boardName" column="board_name"/>
+        <result property="useCommentYn" column="use_comment_yn"/>
+        <result property="useYn" column="use_yn"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="createdBy" column="created_by"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="updatedBy" column="updated_by"/>
+        <result property="deletedYn" column="deleted_yn"/>
+        <result property="menuId" column="menu_id"/>
+        <collection property="posts" ofType="com.api.ast.boardservice.dto.BoardPostDto" javaType="list">
+            <id property="postId" column="post_id"/>
+            <result property="boardId" column="p_board_id"/>
+            <result property="writerId" column="writer_id"/>
+            <result property="title" column="title"/>
+            <result property="content" column="content"/>
+            <result property="postStatusCode" column="post_status_code"/>
+            <result property="createdAt" column="p_created_at"/>
+            <result property="createdBy" column="p_created_by"/>
+            <result property="updatedAt" column="p_updated_at"/>
+            <result property="updatedBy" column="p_updated_by"/>
+            <result property="deletedYn" column="p_deleted_yn"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectBoardOne" resultMap="BoardWithPostsMap">
         SELECT
-            board_id,
-            board_type_code,
-            board_name,
-            use_comment_yn,
-            use_yn,
-            created_at,
-            created_by,
-            updated_at,
-            updated_by,
-            deleted_yn,
-            menu_id
+            m.board_id,
+            m.board_type_code,
+            m.board_name,
+            m.use_comment_yn,
+            m.use_yn,
+            m.created_at,
+            m.created_by,
+            m.updated_at,
+            m.updated_by,
+            m.deleted_yn,
+            m.menu_id,
+            p.post_id,
+            p.board_id AS p_board_id,
+            p.writer_id,
+            p.title,
+            p.content,
+            p.post_status_code,
+            p.created_at AS p_created_at,
+            p.created_by AS p_created_by,
+            p.updated_at AS p_updated_at,
+            p.updated_by AS p_updated_by,
+            p.deleted_yn AS p_deleted_yn
         FROM
-            board_master
-        WHERE board_id = #{boardId}
+            board_master m
+        LEFT JOIN
+            board_post p ON m.board_id = p.board_id AND p.deleted_yn = false
+        WHERE m.board_id = #{boardId}
     </select>
 
     <update id="updateBoardOne" parameterType="com.api.ast.boardservice.dto.BoardDto">

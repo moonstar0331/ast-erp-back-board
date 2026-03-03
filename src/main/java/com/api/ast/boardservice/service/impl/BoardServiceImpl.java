@@ -37,12 +37,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardDto selectBoardOne(Long boardId) {
-        BoardDto boardDto = boardMapper.selectBoardOne(boardId);
-        if (boardDto != null) {
-            List<BoardPostDto> posts = boardMapper.selectPostListByBoardId(boardId);
-            boardDto.setPosts(posts);
-        }
-        return boardDto;
+        return boardMapper.selectBoardOne(boardId);
     }
 
     @Override
