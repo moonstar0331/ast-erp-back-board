@@ -11,7 +11,8 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardPostResponse {private Long postId;
+public class BoardPostResponse {
+    private Long postId;
     private Long boardId;
     private Long writerId;
     private String title;
