@@ -9,12 +9,12 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error"),
-    GROUP_CODE_SELECT_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Group Code Select Error"),
-    GROUP_CODE_CREATE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Group Code Create Error"),
-    GROUP_CODE_UPDATE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Group Code Update Error"),
-    COMMON_CODE_CREATE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Common Code Create Error"),
-    COMMON_CODE_UPDATE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Common Code Update Error"),
-    COMMON_CODE_DELETE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Common Code Delete Error");
+    BOARD_MASTER_SELECT_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Board Master Select Error"),
+    BOARD_MASTER_CREATE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Board Master Create Error"),
+    BOARD_MASTER_UPDATE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Board Master Update Error"),
+    BOARD_POST_CREATE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Board Post Create Error"),
+    BOARD_POST_UPDATE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Board Post Update Error"),
+    BOARD_POST_DELETE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Board Post Delete Error");
 
     private HttpStatus status;
     private String message;

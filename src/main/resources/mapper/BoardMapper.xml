@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.api.ast.boardservice.mapper.BoardMapper">
+
+    <insert id="insertMasterOne" parameterType="com.api.ast.boardservice.dto.BoardMasterDto">
+            INSERT INTO board_master (
+                board_type_code,
+                board_name,
+                use_comment_yn,
+                use_yn,
+                menu_id
+            ) VALUES (
+                #{boardTypeCode},
+                #{boardName},
+                #{useCommentYn},
+                #{useYn},
+                #{menuId}
+            )
+    </insert>
+
+    <select id="selectMasterList" resultType="com.api.ast.boardservice.dto.BoardMasterDto">
+            SELECT
+                board_id,
+                board_type_code,
+                board_name,
+                use_comment_yn,
+                use_yn,
+                created_at,
+                created_by,
+                updated_at,
+                updated_by,
+                deleted_yn,
+                menu_id
+            FROM
+                board_master
+    </select>
+
+    <select id="selectMasterOne" resultType="com.api.ast.boardservice.dto.BoardMasterDto">
+        SELECT
+            board_id,
+            board_type_code,
+            board_name,
+            use_comment_yn,
+            use_yn,
+            created_at,
+            created_by,
+            updated_at,
+            updated_by,
+            deleted_yn,
+            menu_id
+        FROM
+            board_master
+        WHERE board_id = #{masterId}
+    </select>
+
+    <update id="updateMasterOne" parameterType="com.api.ast.boardservice.dto.BoardMasterDto">
+        UPDATE board_master
+        SET
+            board_type_code = #{boardTypeCode},
+            board_name = #{boardName},
+            use_comment_yn = #{useCommentYn},
+            use_yn = #{useYn}
+        WHERE board_id = #{boardId}
+    </update>
+
+    <update id="deleteMasterOne" parameterType="com.api.ast.boardservice.dto.BoardMasterDto">
+            UPDATE board_master
+            SET
+                deleted_yn = true
+            WHERE board_id = #{masterId}
+    </update>
+
+    <insert id="insertPostOne" parameterType="com.api.ast.boardservice.dto.BoardPostDto">
+            INSERT INTO board_post (
+                board_id,
+                writer_id,
+                title,
+                content,
+                post_status_code)
+            VALUES (
+                #{boardId},
+                #{writerId},
+                #{title},
+                #{content},
+                #{postStatusCode}
+            )
+    </insert>
+
+    <select id="selectPostList" resultType="com.api.ast.boardservice.dto.BoardPostDto">
+            SELECT
+                post_id,
+                board_id,
+                writer_id,
+                title,
+                content,
+                post_status_code,
+                created_at,
+                created_by,
+                updated_at,
+                updated_by,
+                deleted_yn
+            FROM
+                board_post
+    </select>
+
+    <select id="selectPostOne" resultType="com.api.ast.boardservice.dto.BoardPostDto">
+            SELECT
+                post_id,
+                board_id,
+                writer_id,
+                title,
+                content,
+                post_status_code,
+                created_at,
+                created_by,
+                updated_at,
+                updated_by,
+                deleted_yn
+            FROM
+                board_post
+            WHERE post_id = #{postId}
+    </select>
+
+    <update id="updatePostOne" parameterType="com.api.ast.boardservice.dto.BoardPostDto">
+            UPDATE board_post
+            SET
+                board_id = #{boardId},
+                writer_id = #{writerId},
+                title = #{title},
+                content = #{content},
+                post_status_code = #{postStatusCode},
+                updated_at = NOW()
+            WHERE post_id = #{postId}
+    </update>
+
+    <update id="deletePostOne" parameterType="com.api.ast.boardservice.dto.BoardPostDto">
+            UPDATE board_post
+            SET
+                deleted_yn = true
+            WHERE post_id = #{postId}
+    </update>
+</mapper>
