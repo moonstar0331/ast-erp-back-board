@@ -5,7 +5,9 @@ import com.api.ast.boardservice.dto.BoardPostDto;
 import com.api.ast.boardservice.exception.BoardServiceException;
 import com.api.ast.boardservice.exception.ErrorCode;
 import com.api.ast.boardservice.mapper.BoardMapper;
+import com.api.ast.boardservice.openfeign.NotificationServiceClient;
 import com.api.ast.boardservice.service.BoardService;
+import com.api.ast.boardservice.vo.NotificationEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import java.util.List;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardMapper boardMapper;
+    private final NotificationServiceClient notificationServiceClient;
 
     @Override
     @Transactional
@@ -68,6 +71,24 @@ public class BoardServiceImpl implements BoardService {
     public void insertPostOne(BoardPostDto dto) {
         try {
             boardMapper.insertPostOne(dto);
+            
+            // 게시글 생성 성공 시 전체 알림 전송 (작성자 제외)
+            NotificationEvent event = NotificationEvent.builder()
+                    .type("NEW_POST")
+                    .title("새로운 게시글이 등록되었습니다.")
+                    .content(dto.getTitle())
+                    .linkUrl("/board/post/" + dto.getPostId())
+                    .build();
+            
+            try {
+                notificationServiceClient.broadcastNotification(event, dto.getWriterId());
+            } catch (Exception e) {
+                log.error("Failed to send broadcast notification: {}", e.getMessage());
+                // 알림 실패가 게시글 생성을 롤백시키지 않도록 예외 처리
+            }
+            
+        } catch (BoardServiceException e) {
+            throw e;
         } catch (Exception e) {
             throw new BoardServiceException(ErrorCode.BOARD_POST_CREATE_ERROR);
         }
