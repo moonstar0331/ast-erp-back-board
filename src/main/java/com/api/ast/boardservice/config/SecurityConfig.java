@@ -52,6 +52,8 @@ public class SecurityConfig {
                 .build();
     }
 
+    // JWT -> Role 변환
+    // roles claim을 Role로 변환하는 Bean
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
 
