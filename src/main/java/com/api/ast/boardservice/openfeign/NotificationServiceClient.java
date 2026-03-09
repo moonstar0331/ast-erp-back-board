@@ -12,5 +12,5 @@ public interface NotificationServiceClient {
     @PostMapping("/api/notifications/broadcast")
     void broadcastNotification(
             @RequestBody NotificationEvent event,
-            @RequestParam(name = "excludeUserId", required = false) Long excludeUserId);
+            @RequestParam(name = "excludeUserUuid", required = false) String excludeUserUuid);
 }

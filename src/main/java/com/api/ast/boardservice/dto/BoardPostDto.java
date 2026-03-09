@@ -15,6 +15,7 @@ public class BoardPostDto {
     private Long postId;
     private Long boardId;
     private Long writerId;
+    private String writerUuid;
     private String title;
     private String content;
     private String postStatusCode;

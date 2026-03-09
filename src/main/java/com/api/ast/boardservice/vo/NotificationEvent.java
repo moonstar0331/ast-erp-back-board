@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class NotificationEvent {
-    private Long userId;
+    private String userUuid;
     private String type;
     private String title;
     private String content;

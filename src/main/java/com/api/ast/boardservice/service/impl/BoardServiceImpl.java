@@ -81,7 +81,7 @@ public class BoardServiceImpl implements BoardService {
                     .build();
             
             try {
-                notificationServiceClient.broadcastNotification(event, dto.getWriterId());
+                notificationServiceClient.broadcastNotification(event, dto.getWriterUuid());
             } catch (Exception e) {
                 log.error("Failed to send broadcast notification: {}", e.getMessage());
                 // 알림 실패가 게시글 생성을 롤백시키지 않도록 예외 처리

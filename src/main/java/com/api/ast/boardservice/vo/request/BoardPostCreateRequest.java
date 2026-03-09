@@ -12,6 +12,7 @@ import lombok.Setter;
 public class BoardPostCreateRequest {
     private Long boardId;
     private Long writerId;
+    private String writerUuid;
     private String title;
     private String content;
     private String postStatusCode;
