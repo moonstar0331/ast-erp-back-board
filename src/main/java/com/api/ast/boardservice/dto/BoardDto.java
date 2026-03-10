@@ -19,7 +19,7 @@ public class BoardDto {
     private String useCommentYn;
     private String useYn;
     private LocalDateTime createdAt;
-    private Long createdBy;
+    private String createdBy;
     private LocalDateTime updatedAt;
     private Long updatedBy;
     private boolean deletedYn;

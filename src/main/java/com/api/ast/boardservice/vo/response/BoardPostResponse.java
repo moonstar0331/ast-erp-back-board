@@ -19,8 +19,8 @@ public class BoardPostResponse {
     private String content;
     private String postStatusCode;
     private LocalDateTime createdAt;
-    private Long createdBy;
+    private String createdBy;
     private LocalDateTime updatedAt;
-    private Long updatedBy;
+    private String updatedBy;
     private boolean deletedYn;
 }

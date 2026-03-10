@@ -19,9 +19,9 @@ public class BoardResponse {
     private String useCommentYn;
     private String useYn;
     private LocalDateTime createdAt;
-    private Long createdBy;
+    private String createdBy;
     private LocalDateTime updatedAt;
-    private Long updatedBy;
+    private String updatedBy;
     private boolean deletedYn;
     private Long menuId;
     private List<BoardPostResponse> posts;
