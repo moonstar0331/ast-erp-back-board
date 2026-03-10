@@ -53,7 +53,7 @@
         <collection property="posts" ofType="com.api.ast.boardservice.dto.BoardPostDto" javaType="list">
             <id property="postId" column="post_id"/>
             <result property="boardId" column="p_board_id"/>
-            <result property="writerId" column="writer_id"/>
+            <result property="writerUuid" column="writer_uuid"/>
             <result property="title" column="title"/>
             <result property="content" column="content"/>
             <result property="postStatusCode" column="post_status_code"/>
@@ -80,7 +80,7 @@
             m.menu_id,
             p.post_id,
             p.board_id AS p_board_id,
-            p.writer_id,
+            p.writer_uuid,
             p.title,
             p.content,
             p.post_status_code,
@@ -111,7 +111,7 @@
             m.menu_id,
             p.post_id,
             p.board_id AS p_board_id,
-            p.writer_id,
+            p.writer_uuid,
             p.title,
             p.content,
             p.post_status_code,
@@ -147,13 +147,13 @@
     <insert id="insertPostOne" parameterType="com.api.ast.boardservice.dto.BoardPostDto">
             INSERT INTO board_post (
                 board_id,
-                writer_id,
+                writer_uuid,
                 title,
                 content,
                 post_status_code)
             VALUES (
                 #{boardId},
-                #{writerId},
+                #{writerUuid},
                 #{title},
                 #{content},
                 #{postStatusCode}
@@ -164,7 +164,7 @@
             SELECT
                 post_id,
                 board_id,
-                writer_id,
+                writer_uuid,
                 title,
                 content,
                 post_status_code,
@@ -181,7 +181,7 @@
         SELECT
             post_id,
             board_id,
-            writer_id,
+            writer_uuid,
             title,
             content,
             post_status_code,
@@ -199,7 +199,7 @@
             SELECT
                 post_id,
                 board_id,
-                writer_id,
+                writer_uuid,
                 title,
                 content,
                 post_status_code,
@@ -217,7 +217,7 @@
             UPDATE board_post
             SET
                 board_id = #{boardId},
-                writer_id = #{writerId},
+                writer_uuid = #{writerUuid},
                 title = #{title},
                 content = #{content},
                 post_status_code = #{postStatusCode},

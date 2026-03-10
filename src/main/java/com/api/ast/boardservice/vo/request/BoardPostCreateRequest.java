@@ -11,7 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class BoardPostCreateRequest {
     private Long boardId;
-    private Long writerId;
     private String writerUuid;
     private String title;
     private String content;
