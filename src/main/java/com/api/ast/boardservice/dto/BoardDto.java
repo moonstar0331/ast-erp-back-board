@@ -21,7 +21,7 @@ public class BoardDto {
     private LocalDateTime createdAt;
     private String createdBy;
     private LocalDateTime updatedAt;
-    private Long updatedBy;
+    private String updatedBy;
     private boolean deletedYn;
     private Long menuId;
     private List<BoardPostDto> posts;
